@@ -34,6 +34,7 @@ def get_all_post():
 
 @app.route('/index.html')
 def home():
+    print('Request for index page received')
     return render_template('index.html', blogs=all_posts)
 
 
