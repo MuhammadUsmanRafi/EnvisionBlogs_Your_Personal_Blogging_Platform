@@ -1,6 +1,4 @@
-import os
-
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request
 import requests
 from post import Post
 import smtplib
@@ -36,7 +34,6 @@ def get_all_post():
 
 @app.route('/index.html')
 def home():
-    print('Request for index page received')
     return render_template('index.html', blogs=all_posts)
 
 
@@ -56,17 +53,6 @@ def show_post(index):
         if blog_post.id == index:
             requested_post = blog_post
     return render_template("post.html", blogs=requested_post)
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico',
-                               mimetype='image/vnd.microsoft.icon')
-
-
-@app.route('/hello', methods=['POST'])
-def hello():
-    name = request.form.get('name')
 
 
 @app.route("/contact.html", methods=["GET", "POST"])
